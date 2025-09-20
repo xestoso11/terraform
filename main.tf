@@ -24,6 +24,8 @@ resource "proxmox_vm_qemu" "masters" {
   clone       = var.template_name
   full_clone  = true
   onboot      = true
+  agent       = 1
+  tags        = "k8s,master,terraform,ubuntu,linux"
 
   memory  = var.master_memory
   scsihw  = "virtio-scsi-pci"
@@ -65,6 +67,8 @@ resource "proxmox_vm_qemu" "workers" {
   clone       = var.template_name
   full_clone  = true
   onboot      = true
+  agent       = 1
+  tags        = "k8s,worker,terraform,ubuntu,linux"
 
   memory  = var.worker_memory
   scsihw  = "virtio-scsi-pci"
@@ -96,5 +100,4 @@ resource "proxmox_vm_qemu" "workers" {
   sshkeys    = var.ssh_public_key
   ciuser     = var.uservm
   cipassword = var.passvm
-
 }
